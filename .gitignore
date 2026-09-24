@@ -18,3 +18,4 @@ Thumbs.db
 # Nástroje
 .claude/worktrees/
 *.har
+.wt/
