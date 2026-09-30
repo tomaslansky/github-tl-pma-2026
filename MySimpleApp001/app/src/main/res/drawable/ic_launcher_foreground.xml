@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Otazník uprostřed ikony – minihra Uhodni číslo. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,33c-8.3,0 -14,5.2 -14,12.5h7c0,-3.4 2.8,-5.8 7,-5.8c4,0 6.8,2.3 6.8,5.5c0,2.6 -1.5,4.1 -4.4,5.9c-3.9,2.4 -5.9,4.9 -5.9,9.6v2.3h6.8v-1.6c0,-2.9 1,-4.2 4.3,-6.2c3.9,-2.4 6.3,-5.4 6.3,-10.3C67.9,37.7 62.3,33 54,33zM50.2,68.5h7.4v7.4h-7.4z" />
+</vector>
