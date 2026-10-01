@@ -7,30 +7,34 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.myapp001bdicethrowcompose.ui.theme.MyApp001bDiceThrowCOMPOSETheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,14 +49,14 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DiceApp(){
     val diceSymbols = listOf("⚀", "⚁", "⚂", "⚃", "⚄", "⚅")
-    var diceValue by remember { mutableStateOf(value = 1) }
+    // rememberSaveable = hodnota přežije i otočení telefonu
+    var diceValue by rememberSaveable { mutableStateOf(value = 1) }
+    var history by rememberSaveable { mutableStateOf(listOf<Int>()) }
     var isRolling by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
 
     val backgroundColor = Color(0xFFF5F3FF)
     val primaryColor = Color(0xFF352060)
-
-
 
     Column(
         modifier = Modifier
@@ -87,6 +91,7 @@ fun DiceApp(){
                         delay(250)
                     }
                     diceValue = (1..6).random()
+                    history = history + diceValue
                     isRolling = false
                 }
             },
@@ -98,6 +103,58 @@ fun DiceApp(){
         ) {
             Text(text = "Hodit", fontSize = 24.sp)
         }
+
+        // Statistiky jsou vidět pořád, aby tlačítko po prvním hodu neposkočilo
+        Spacer(modifier = Modifier.height(32.dp))
+        Statistics(history, diceSymbols, primaryColor)
+
+        TextButton(
+            onClick = { history = emptyList() },
+            enabled = !isRolling && history.isNotEmpty()
+        ) {
+            Text(text = "Vymazat historii")
+        }
     }
 }
 
+@Composable
+fun Statistics(history: List<Int>, diceSymbols: List<String>, color: Color) {
+    val average = if (history.isEmpty()) "–"
+        else String.format(Locale.getDefault(), "%.2f", history.average())
+
+    Text(
+        text = "Hodů: ${history.size}   Součet: ${history.sum()}   Průměr: $average",
+        fontSize = 16.sp,
+        color = color
+    )
+
+    // Kolikrát padla která hodnota
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 16.dp),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        for (value in 1..6) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(text = diceSymbols[value - 1], fontSize = 32.sp, color = color)
+                Text(text = "${history.count { it == value }}×", fontSize = 14.sp, color = color)
+            }
+        }
+    }
+
+    // Posledních 10 hodů, nejnovější vlevo
+    Text(
+        text = "Poslední hody",
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Bold,
+        color = color,
+        modifier = Modifier.padding(top = 16.dp)
+    )
+    Text(
+        text = if (history.isEmpty()) "zatím žádné"
+            else history.takeLast(10).reversed().joinToString(" ") { diceSymbols[it - 1] },
+        fontSize = 28.sp,
+        color = color
+    )
+}
