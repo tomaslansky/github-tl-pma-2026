@@ -41,4 +41,77 @@
 
         />
 
+    <!-- Statistiky: počet hodů, součet, průměr -->
+    <TextView
+        android:id="@+id/tvStats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textColor="#FF9800"
+        android:textSize="16sp"
+        tools:text="Hodů: 5   Součet: 17   Průměr: 3,40" />
+
+    <!-- Kolikrát padla která hodnota (text se doplní v MainActivity) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvCount1"
+            style="@style/DiceCount"
+            tools:text="⚀\n0×" />
+
+        <TextView
+            android:id="@+id/tvCount2"
+            style="@style/DiceCount"
+            tools:text="⚁\n0×" />
+
+        <TextView
+            android:id="@+id/tvCount3"
+            style="@style/DiceCount"
+            tools:text="⚂\n0×" />
+
+        <TextView
+            android:id="@+id/tvCount4"
+            style="@style/DiceCount"
+            tools:text="⚃\n0×" />
+
+        <TextView
+            android:id="@+id/tvCount5"
+            style="@style/DiceCount"
+            tools:text="⚄\n0×" />
+
+        <TextView
+            android:id="@+id/tvCount6"
+            style="@style/DiceCount"
+            tools:text="⚅\n0×" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Poslední hody"
+        android:textColor="#FF9800"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FF9800"
+        android:textSize="28sp"
+        tools:text="⚃ ⚄ ⚂" />
+
+    <Button
+        android:id="@+id/btnClear"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vymazat historii" />
+
 </LinearLayout>
