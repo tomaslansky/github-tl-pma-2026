@@ -39,25 +39,33 @@ import java.util.Locale
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Aplikace kreslí i pod systémové lišty, odsazení řeší safeDrawingPadding() v DiceApp
         enableEdgeToEdge()
+        // Místo XML layoutu se celé UI popisuje Compose funkcemi
         setContent {
             MaterialTheme { DiceApp() }
         }
     }
 }
 
+// Hlavní obrazovka: nadpis, kostka, tlačítko a statistiky hodů
 @Composable
 fun DiceApp(){
+    // Unicode symboly stěn kostky, index 0 = jednička
     val diceSymbols = listOf("⚀", "⚁", "⚂", "⚃", "⚄", "⚅")
+    // Stav obrazovky – při jeho změně Compose UI automaticky překreslí (rekompozice).
     // rememberSaveable = hodnota přežije i otočení telefonu
     var diceValue by rememberSaveable { mutableStateOf(value = 1) }
     var history by rememberSaveable { mutableStateOf(listOf<Int>()) }
+    // true během animace hodu – tlačítko je mezitím vypnuté
     var isRolling by remember { mutableStateOf(false) }
+    // Korutiny pro animaci (delay neblokuje hlavní vlákno)
     val scope = rememberCoroutineScope()
 
     val backgroundColor = Color(0xFFF5F3FF)
     val primaryColor = Color(0xFF352060)
 
+    // Column skládá prvky pod sebe; obsah je vystředěný a odsazený od systémových lišt
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -68,12 +76,13 @@ fun DiceApp(){
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Hod kostkou",
+            text = "Hoď kostkou",
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
             color = primaryColor
         )
 
+        // Kostka – stačí změnit diceValue a text se překreslí sám
         Text(
             text = diceSymbols[diceValue - 1],
             fontSize = 120.sp,
@@ -86,6 +95,7 @@ fun DiceApp(){
             onClick = {
                 isRolling = true
                 scope.launch {
+                    // Animace: 10 náhodných stěn po 250 ms, pak výsledný hod
                     repeat(10) {
                         diceValue = (1..6).random()
                         delay(250)
@@ -95,6 +105,7 @@ fun DiceApp(){
                     isRolling = false
                 }
             },
+            // Během animace je tlačítko zakázané
             enabled = !isRolling,
             colors = ButtonDefaults.buttonColors(
                 containerColor = primaryColor,
@@ -117,6 +128,7 @@ fun DiceApp(){
     }
 }
 
+// Souhrn všech hodů: počet, součet, průměr, četnosti a posledních 10 hodů
 @Composable
 fun Statistics(history: List<Int>, diceSymbols: List<String>, color: Color) {
     val average = if (history.isEmpty()) "–"

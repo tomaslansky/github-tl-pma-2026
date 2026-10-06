@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Hlavní obrazovka: svislý LinearLayout, obsah vystředěný (gravity="center") -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/llMain"
@@ -7,20 +8,22 @@
     android:orientation="vertical"
     android:padding="24dp"
     android:gravity="center"
-    android:background="#F5F3FF"
+    android:background="@color/dice_background"
     tools:context=".MainActivity">
 
+    <!-- Nadpis -->
     <TextView
         android:id="@+id/tvTitle"
-        android:layout_width="163dp"
-        android:layout_height="31dp"
-        android:text="Hod kostkou"
-        android:textColor="#FF9800"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hoď kostkou"
+        android:textColor="@color/dice_primary"
         android:textSize="24sp"
         android:textStyle="bold"
 
         />
 
+    <!-- Velký symbol kostky, text mění MainActivity -->
     <TextView
         android:id="@+id/tvDice"
         android:layout_width="wrap_content"
@@ -29,15 +32,18 @@
         android:layout_marginBottom="24dp"
         android:text="⚀"
         android:textSize="120sp"
-        android:textColor="#FF9800"
+        android:textColor="@color/dice_primary"
         />
 
+    <!-- Tlačítko pro hod -->
     <Button
         android:id="@+id/btnRoll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="hodit"
+        android:text="Hodit"
         android:textSize="24sp"
+        android:backgroundTint="@color/dice_primary_state"
+        android:textColor="@color/white"
 
         />
 
@@ -47,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:textColor="#FF9800"
+        android:textColor="@color/dice_primary"
         android:textSize="16sp"
         tools:text="Hodů: 5   Součet: 17   Průměr: 3,40" />
 
@@ -95,7 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Poslední hody"
-        android:textColor="#FF9800"
+        android:textColor="@color/dice_primary"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -103,7 +109,7 @@
         android:id="@+id/tvHistory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#FF9800"
+        android:textColor="@color/dice_primary"
         android:textSize="28sp"
         tools:text="⚃ ⚄ ⚂" />
 
@@ -112,6 +118,7 @@
         style="@style/Widget.Material3.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Vymazat historii" />
+        android:text="Vymazat historii"
+        android:textColor="@color/dice_primary_state" />
 
 </LinearLayout>

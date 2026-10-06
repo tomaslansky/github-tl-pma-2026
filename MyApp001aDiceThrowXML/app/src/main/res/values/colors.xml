@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- Barvy aplikace – stejné jako v Compose verzi -->
+    <color name="dice_primary">#FF352060</color>
+    <color name="dice_background">#FFF5F3FF</color>
 </resources>

@@ -14,10 +14,13 @@ import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
+    // Unicode symboly stěn kostky, index 0 = jednička
     private val diceSymbols = listOf("⚀", "⚁", "⚂", "⚃", "⚄", "⚅")
     private var diceValue = 1
+    // Všechny dosavadní hody (hodnoty 1–6)
     private val history = mutableListOf<Int>()
 
+    // Prvky z activity_main.xml, najdou se v onCreate přes findViewById
     private lateinit var tvDice: TextView
     private lateinit var tvStats: TextView
     private lateinit var tvHistory: TextView
@@ -27,14 +30,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Aplikace kreslí i pod systémové lišty
         enableEdgeToEdge()
+        // Načtení layoutu z XML
         setContentView(R.layout.activity_main)
+        // Odsazení obsahu od systémových lišt (stavový řádek, navigace)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.llMain)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
+        // Propojení proměnných s prvky layoutu podle ID
         tvDice = findViewById(R.id.tvDice)
         tvStats = findViewById(R.id.tvStats)
         tvHistory = findViewById(R.id.tvHistory)
@@ -55,13 +62,17 @@ class MainActivity : AppCompatActivity() {
 
         btnRoll.setOnClickListener {
 
+            // Korutina: delay() čeká, aniž by zablokoval UI
             lifecycleScope.launch {
+                // Během animace je tlačítko zakázané
                 btnRoll.isEnabled = false
                 btnClear.isEnabled = false
+                // Animace: 10 náhodných stěn po 250 ms
                 repeat(times = 10){
                     tvDice.text = diceSymbols.random()
                     delay(timeMillis = 250)
                 }
+                // Výsledný hod – text kostky je potřeba přepsat ručně
                 diceValue = (1..6).random()
                 tvDice.text = diceSymbols[diceValue -1 ]
                 history.add(diceValue)
@@ -77,6 +88,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Uložení stavu před zničením aktivity (např. při otočení telefonu)
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt("diceValue", diceValue)
