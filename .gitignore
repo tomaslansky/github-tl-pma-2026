@@ -19,3 +19,8 @@ Thumbs.db
 .claude/worktrees/
 *.har
 .wt/
+
+# Jen lokálně – nepatří do veřejného repozitáře
+MyApp001/
+CLAUDE.md
+.claude/
