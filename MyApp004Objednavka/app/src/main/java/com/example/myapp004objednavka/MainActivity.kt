@@ -50,15 +50,15 @@ class MainActivity : AppCompatActivity() {
 
         // Změna obrázku v závislosti na vybraném radioButtonu
         binding.rbKnife1.setOnClickListener {
-            binding.ivKnife.setImageResource(R.drawable.knife_butterfly)
+            binding.ivKnife.setImageResource(R.drawable.img_knife_butterfly)
         }
 
         binding.rbKnife2.setOnClickListener {
-            binding.ivKnife.setImageResource(R.drawable.knife_karambit)
+            binding.ivKnife.setImageResource(R.drawable.img_knife_karambit)
         }
 
         binding.rbKnife3.setOnClickListener {
-            binding.ivKnife.setImageResource(R.drawable.knife_skeleton)
+            binding.ivKnife.setImageResource(R.drawable.img_knife_skeleton)
         }
     }
 }

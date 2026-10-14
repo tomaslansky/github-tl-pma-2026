@@ -100,6 +100,6 @@
         android:layout_marginTop="20dp"
         android:contentDescription="@string/knife_image"
         android:scaleType="centerInside"
-        android:src="@drawable/knife_butterfly" />
+        android:src="@drawable/img_knife_butterfly" />
 
 </LinearLayout>
