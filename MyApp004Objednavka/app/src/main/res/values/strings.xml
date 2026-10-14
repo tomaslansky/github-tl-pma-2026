@@ -17,8 +17,10 @@
     <string name="textview_order_summary_text">Order summary:</string>
     <string name="knife_image">Image of the selected knife</string>
 
-    <!-- %1$s = vybraný nůž a doplňky -->
-    <string name="order_summary">Order summary: %1$s</string>
-    <!-- %1$s = název nože -->
-    <string name="order_confirmation">Your %1$s knife order has been sent!</string>
+    <!-- %1$s = vybraný nůž a doplňky, %2$,d = cena celkem -->
+    <string name="order_summary">Order summary: %1$s\nTotal price: %2$,d CZK</string>
+    <!-- %1$s = název nože, %2$,d = cena celkem -->
+    <string name="order_confirmation">Your %1$s knife order for %2$,d CZK has been sent!</string>
+    <!-- Vlastní rozšíření: aktuální cena, %1$,d = cena s oddělením tisíců podle jazyka -->
+    <string name="price_label">Price: %1$,d CZK</string>
 </resources>

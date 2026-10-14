@@ -16,6 +16,7 @@
     <string name="textview_order_summary_text">Bestellübersicht:</string>
     <string name="knife_image">Bild des ausgewählten Messers</string>
 
-    <string name="order_summary">Bestellübersicht: %1$s</string>
-    <string name="order_confirmation">Deine Bestellung des Messers %1$s wurde erfolgreich gesendet!</string>
+    <string name="order_summary">Bestellübersicht: %1$s\nGesamtpreis: %2$,d CZK</string>
+    <string name="order_confirmation">Deine Bestellung des Messers %1$s für %2$,d CZK wurde erfolgreich gesendet!</string>
+    <string name="price_label">Preis: %1$,d CZK</string>
 </resources>

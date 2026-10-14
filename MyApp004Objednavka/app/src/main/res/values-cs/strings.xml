@@ -16,6 +16,7 @@
     <string name="textview_order_summary_text">Souhrn objednávky:</string>
     <string name="knife_image">Obrázek vybraného nože</string>
 
-    <string name="order_summary">Souhrn objednávky: %1$s</string>
-    <string name="order_confirmation">Objednávka nože %1$s byla úspěšně odeslána!</string>
+    <string name="order_summary">Souhrn objednávky: %1$s\nCena celkem: %2$,d Kč</string>
+    <string name="order_confirmation">Objednávka nože %1$s za %2$,d Kč byla úspěšně odeslána!</string>
+    <string name="price_label">Cena: %1$,d Kč</string>
 </resources>
