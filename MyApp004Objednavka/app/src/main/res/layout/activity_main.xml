@@ -1,19 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".MainActivity">
 
+    <!-- Nadpis obrazovky -->
     <TextView
+        android:id="@+id/tvHeaderTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/header_title"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <!-- Otázka -->
+    <TextView
+        android:id="@+id/tvOrderTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/order_title"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <!-- Výběr nože – vždy jen jeden -->
+    <RadioGroup
+        android:id="@+id/rgKnives"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <RadioButton
+            android:id="@+id/rbKnife1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/knife_1" />
+
+        <RadioButton
+            android:id="@+id/rbKnife2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/knife_2" />
+
+        <RadioButton
+            android:id="@+id/rbKnife3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/knife_3" />
+    </RadioGroup>
+
+    <!-- Doplňky – lze zaškrtnout libovolně -->
+    <CheckBox
+        android:id="@+id/cbStatTrak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/extra_stattrak" />
+
+    <CheckBox
+        android:id="@+id/cbNameTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/extra_name_tag" />
+
+    <CheckBox
+        android:id="@+id/cbFactoryNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/extra_factory_new" />
+
+    <Button
+        android:id="@+id/btnOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_make_order_text" />
+
+    <!-- Souhrn objednávky -->
+    <TextView
+        android:id="@+id/tvOrder"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:background="#FFF59D"
+        android:padding="16dp"
+        android:text="@string/textview_order_summary_text" />
+
+    <!-- Obrázek vybraného nože -->
+    <ImageView
+        android:id="@+id/ivKnife"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/knife_image"
+        android:scaleType="centerInside"
+        android:src="@drawable/knife_butterfly" />
+
+</LinearLayout>
