@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Messerbestellung</string>
+
+    <string name="header_title">Messerbestellung</string>
+    <string name="order_title">Welches Messer möchtest du bestellen?</string>
+
+    <string name="knife_1">Butterfly</string>
+    <string name="knife_2">Karambit</string>
+    <string name="knife_3">Skeleton</string>
+
+    <string name="extra_stattrak">StatTrak™-Killzähler</string>
+    <string name="extra_name_tag">eigener Name (Namensschild)</string>
+    <string name="extra_factory_new">Zustand Fabrikneu</string>
+
+    <string name="button_make_order_text">Bestellen</string>
+    <string name="textview_order_summary_text">Bestellübersicht:</string>
+    <string name="knife_image">Bild des ausgewählten Messers</string>
+
+    <string name="order_summary">Bestellübersicht: %1$s</string>
+    <string name="order_confirmation">Deine Bestellung des Messers %1$s wurde erfolgreich gesendet!</string>
+</resources>

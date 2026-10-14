@@ -1,18 +1,24 @@
 <resources>
-    <string name="app_name">MyApp004Objednavka</string>
+    <!-- Výchozí jazyk (fallback) = angličtina; čeština je ve values-cs, němčina ve values-de -->
+    <string name="app_name">Knife Order</string>
 
-    <string name="header_title">Objednávka nože</string>
-    <string name="order_title">Jaký nůž si chceš objednat?</string>
+    <string name="header_title">Knife Order</string>
+    <string name="order_title">Which knife do you want to order?</string>
 
     <string name="knife_1">Butterfly</string>
     <string name="knife_2">Karambit</string>
     <string name="knife_3">Skeleton</string>
 
-    <string name="extra_stattrak">StatTrak™ počítadlo zabití</string>
-    <string name="extra_name_tag">vlastní jmenovka (Name Tag)</string>
-    <string name="extra_factory_new">stav Factory New</string>
+    <string name="extra_stattrak">StatTrak™ kill counter</string>
+    <string name="extra_name_tag">custom name (Name Tag)</string>
+    <string name="extra_factory_new">Factory New condition</string>
 
-    <string name="button_make_order_text">Objednat</string>
-    <string name="textview_order_summary_text">Souhrn objednávky:</string>
-    <string name="knife_image">Obrázek vybraného nože</string>
+    <string name="button_make_order_text">Order</string>
+    <string name="textview_order_summary_text">Order summary:</string>
+    <string name="knife_image">Image of the selected knife</string>
+
+    <!-- %1$s = vybraný nůž a doplňky -->
+    <string name="order_summary">Order summary: %1$s</string>
+    <!-- %1$s = název nože -->
+    <string name="order_confirmation">Your %1$s knife order has been sent!</string>
 </resources>

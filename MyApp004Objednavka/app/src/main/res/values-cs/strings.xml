@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Objednávka nože</string>
+
+    <string name="header_title">Objednávka nože</string>
+    <string name="order_title">Jaký nůž si chceš objednat?</string>
+
+    <string name="knife_1">Butterfly</string>
+    <string name="knife_2">Karambit</string>
+    <string name="knife_3">Skeleton</string>
+
+    <string name="extra_stattrak">StatTrak™ počítadlo zabití</string>
+    <string name="extra_name_tag">vlastní jmenovka (Name Tag)</string>
+    <string name="extra_factory_new">stav Factory New</string>
+
+    <string name="button_make_order_text">Objednat</string>
+    <string name="textview_order_summary_text">Souhrn objednávky:</string>
+    <string name="knife_image">Obrázek vybraného nože</string>
+
+    <string name="order_summary">Souhrn objednávky: %1$s</string>
+    <string name="order_confirmation">Objednávka nože %1$s byla úspěšně odeslána!</string>
+</resources>

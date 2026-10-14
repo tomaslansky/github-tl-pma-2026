@@ -1,6 +1,7 @@
 package com.example.myapp004objednavka
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -36,17 +37,21 @@ class MainActivity : AppCompatActivity() {
                 else -> binding.rbKnife3
             }
 
-            val orderText = getString(R.string.textview_order_summary_text) + " " +
-                    knife.text +
-                    (if (binding.cbStatTrak.isChecked) "; " + binding.cbStatTrak.text else "") +
-                    (if (binding.cbNameTag.isChecked) "; " + binding.cbNameTag.text else "") +
-                    (if (binding.cbFactoryNew.isChecked) "; " + binding.cbFactoryNew.text else "")
+            // nůž + zaškrtnuté doplňky (texty CheckBoxů už jsou přeložené ze strings.xml)
+            var items = knife.text.toString()
+            if (binding.cbStatTrak.isChecked) items += "; " + binding.cbStatTrak.text
+            if (binding.cbNameTag.isChecked) items += "; " + binding.cbNameTag.text
+            if (binding.cbFactoryNew.isChecked) items += "; " + binding.cbFactoryNew.text
 
-            binding.tvOrder.text = orderText
+            // %1$s ve strings.xml se nahradí seznamem položek – slovosled určuje překlad
+            binding.tvOrder.text = getString(R.string.order_summary, items)
+
+            Toast.makeText(
+                this,
+                getString(R.string.order_confirmation, knife.text),
+                Toast.LENGTH_SHORT
+            ).show()
         }
-
-
-
 
         // Změna obrázku v závislosti na vybraném radioButtonu
         binding.rbKnife1.setOnClickListener {
