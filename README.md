@@ -7,6 +7,7 @@ Repozitář k předmětu **Programování mobilních aplikací** (TUL, 2026/2027
 | [`MySimpleApp001/`](MySimpleApp001) | **Uhodni číslo** – první aplikace podle [wiki 01 ‐ Příprava prostředí](https://github.com/zizanek/github-tz-pma-2026/wiki/01-%E2%80%90-P%C5%99%C3%ADprava-prost%C5%99ed%C3%AD) (Empty Views Activity, XML + Kotlin) |
 | [`MyApp001aDiceThrowXML/`](MyApp001aDiceThrowXML) | **Hoď kostkou** – XML + Kotlin, přístup k prvkům přes `findViewById` ([úkol 003](https://github.com/zizanek/github-tz-pma-2026/issues/3)) |
 | [`MyApp001bDiceThrowCOMPOSE/`](MyApp001bDiceThrowCOMPOSE) | **Hoď kostkou** – Jetpack Compose, rozhraní definované v Kotlinu ([úkol 003](https://github.com/zizanek/github-tz-pma-2026/issues/3)) |
+| [`MyApp004Objednavka/`](MyApp004Objednavka) | **Objednávka nože** – LinearLayout, View Binding, lokalizace EN/CS/DE, výpočet ceny ([úkol 004](https://github.com/zizanek/github-tz-pma-2026/issues/4)) |
 
 ---
 
@@ -65,3 +66,53 @@ V obou verzích navíc:
 - **historie** – posledních 10 hodů (nejnovější vlevo) a tlačítko *Vymazat historii*,
 - **zachování stavu** při otočení telefonu,
 - jednotné barvy (`#352060` na `#F5F3FF`), v XML verzi definované v `colors.xml`.
+
+---
+
+## Úkol 004 – Objednávka nože
+
+Jednoduchý objednávkový systém na vlastní téma: **nože z Counter-Strike 2**
+(Butterfly, Karambit, Skeleton – skin Fade). Postup a commity: issue [#4](https://github.com/tomaslansky/github-tl-pma-2026/issues/4).
+
+| Čeština | English (výchozí) | Deutsch |
+|:---:|:---:|:---:|
+| <img src="MyApp004Objednavka/screenshots/objednavka_cs.png" width="240" alt="Česká verze"> | <img src="MyApp004Objednavka/screenshots/objednavka_en.png" width="240" alt="Anglická verze"> | <img src="MyApp004Objednavka/screenshots/objednavka_de.png" width="240" alt="Německá verze"> |
+
+### Základ aplikace
+
+- **LinearLayout** (vertikální): nadpis, `RadioGroup` s výběrem nože, `CheckBox`y s doplňky
+  (StatTrak™, Name Tag, Factory New), tlačítko **Objednat**, žlutý souhrn objednávky a obrázek.
+- **RadioButton mění obrázek** nože (`binding.ivKnife.setImageResource(...)`).
+- **Objednat** vypíše souhrn (vybraný nůž + zaškrtnuté doplňky) a zobrazí `Toast`.
+- **View Binding** místo `findViewById` – `buildFeatures { viewBinding = true }`,
+  ke všem prvkům se přistupuje přes `binding.<id>`.
+- Obrázky pojmenované podle konvence `img_knife_*.png` ([wiki 000d](https://github.com/zizanek/github-tz-pma-2026/wiki/000d-%E2%80%90-Pravidla-a-konvence-pro-pojmenov%C3%A1n%C3%AD-soubor%C5%AF-ve-slo%C5%BEce-%60drawable%60)).
+
+### Lokalizace
+
+| Složka | Jazyk |
+|---|---|
+| `res/values/strings.xml` | angličtina – výchozí jazyk (fallback pro všechny ostatní jazyky) |
+| `res/values-cs/strings.xml` | čeština |
+| `res/values-de/strings.xml` | němčina |
+
+V layoutu ani v kódu nejsou žádné texty natvrdo. Dynamické texty (souhrn, Toast, cena)
+se skládají přes `getString()` se zástupnými znaky, takže slovosled určuje překlad:
+
+```xml
+<string name="order_summary">Souhrn objednávky: %1$s\nCena celkem: %2$,d Kč</string>
+```
+
+```kotlin
+binding.tvOrder.text = getString(R.string.order_summary, items, price)
+```
+
+Ověřeno změnou jazyka aplikace v emulátoru (snímky výše).
+
+### Vlastní rozšíření – výpočet ceny
+
+- Každý nůž i doplněk má cenu (orientační ceny ze Steam Marketu v Kč).
+- **Aktuální cena** se přepočítá při každé změně výběru (`setOnCheckedChangeListener`
+  na `RadioGroup` i všech `CheckBox`ech).
+- Celková cena je i v **souhrnu** a v **Toastu** po odeslání objednávky.
+- Formát `%,d` odděluje tisíce podle jazyka: `69 000 Kč` / `69,000 CZK` / `69.000 CZK`.
